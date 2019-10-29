@@ -1,5 +1,20 @@
 # NPM Dependencies #
 node_modules
 
+# Typescript compilation files
+/out-tsc
+
+# IDE - VSCode specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+
 # Mac Files #
 .DS_Store
