@@ -19,4 +19,11 @@
     .navbar-text-size {
         font-size: 14px;
     }
+    .dropdown-alignment {
+        right: 0;
+        left: unset;
+        .dropdown-item {
+            text-align: right;
+        }
+    }
 }
