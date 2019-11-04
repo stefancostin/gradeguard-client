@@ -1,0 +1,22 @@
+.gradeguard-logo {
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 17px;
+    position: relative;
+    top: -1px;
+    color: #316ba8 !important;
+    .emphasis {
+        font-weight: 700;
+    }
+}
+
+.navbar {
+    border-bottom: 1px solid #dddddd;
+    .nav-link {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .navbar-text-size {
+        font-size: 14px;
+    }
+}
