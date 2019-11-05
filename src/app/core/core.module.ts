@@ -4,9 +4,9 @@ import { CoreRoutingModule } from './core-routing.module';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
-import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   imports: [
