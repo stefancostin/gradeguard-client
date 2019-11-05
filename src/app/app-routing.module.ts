@@ -15,19 +15,19 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: '../app/admin/admin.module#AdminModule'
+    loadChildren: './admin/admin.module#AdminModule'
   },
   {
     path: 'professor',
-    loadChildren: '../app/professor/professor.module#ProfessorModule'
+    loadChildren: './professor/professor.module#ProfessorModule'
   },
   {
     path: 'student',
-    loadChildren: '../app/student/student.module#StudentModule'
+    loadChildren: './student/student.module#StudentModule'
   },
   {
     path: '**',
-    component: HomeComponent
+    redirectTo: ''
   }
 ];
 
