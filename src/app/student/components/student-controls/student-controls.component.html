@@ -1,4 +1,33 @@
-<p>
-  student-controls works!
-  <button mat-raised-button color="primary">Primary</button>
-</p>
+<div class="container pt-2 mt-3">
+  <div class="row mb-2">
+
+    <mat-form-field class="col-sm-3 col-md-2">
+      <mat-label>Anul</mat-label>
+      <mat-select>
+        <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
+          {{ Year.I }}
+        </mat-option>
+        <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
+          {{ Year.II }}
+        </mat-option>
+        <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
+          {{ Year.III }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col-sm-3 col-md-2">
+      <mat-label>Semestrul</mat-label>
+      <mat-select>
+        <mat-option [value]="Semester.I" [disabled]="isSemDisabled(Semester.I)">
+          {{ Semester.I }}
+        </mat-option>
+        <mat-option [value]="Semester.II" [disabled]="isSemDisabled(Semester.II)">
+          {{ Semester.II }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <mat-divider class="section-divider"></mat-divider>
+</div>

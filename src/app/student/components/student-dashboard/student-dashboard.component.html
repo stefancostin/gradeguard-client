@@ -1,4 +1,4 @@
-<section class="container section-container shadow-sm">
+<section class="container section-container shadow-sm mb-4">
   <!-- Header -->
   <article class="row section-header">
     <div class="col-sm-6">
@@ -25,32 +25,38 @@
   </article>
 
   <!-- Content -->
-  <article class="row">
+  <article class="row ml-0 mr-0 pb-2 mb-4">
     <div class="col-sm-12">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        <!-- Subject Column -->
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef> Materia </th>
+          <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
         </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <!-- Laboratory Grade Column -->
+        <ng-container matColumnDef="labGrade">
+          <th mat-header-cell *matHeaderCellDef> Nota Laborator </th>
+          <td mat-cell *matCellDef="let element"> {{element.labGrade}} </td>
         </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef> Weight </th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        <!-- Project Grade Column -->
+        <ng-container matColumnDef="projectGrade">
+          <th mat-header-cell *matHeaderCellDef> Nota Proiect </th>
+          <td mat-cell *matCellDef="let element"> {{element.projectGrade}} </td>
         </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <!-- Exam Grade Column -->
+        <ng-container matColumnDef="examGrade">
+          <th mat-header-cell *matHeaderCellDef> Nota Examen </th>
+          <td mat-cell *matCellDef="let element"> {{element.examGrade}} </td>
+        </ng-container>
+
+        <!-- Final Grade Column -->
+        <ng-container matColumnDef="finalGrade">
+          <th mat-header-cell *matHeaderCellDef> Nota Finala </th>
+          <td mat-cell *matCellDef="let element"> {{element.finalGrade}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

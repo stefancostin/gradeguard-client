@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select'; 
 import { MatTableModule } from '@angular/material/table';
 
 import { StudentRoutingModule } from './student-routing.module';
@@ -13,6 +15,8 @@ import { StudentControlsComponent } from './components/student-controls/student-
     CommonModule,
     StudentRoutingModule,
     MatButtonModule,
+    MatDividerModule,
+    MatSelectModule,
     MatTableModule
   ],
   declarations: [StudentDashboardComponent, StudentControlsComponent]

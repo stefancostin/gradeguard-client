@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 const ELEMENT_DATA = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {subject: 'LTW', labGrade: 9, projectGrade: 10, examGrade: 5, finalGrade: 7},
+  {subject: 'SSC', labGrade: 10, projectGrade: 9, examGrade: 4, finalGrade: 8},
+  {subject: 'FPD', labGrade: 5, projectGrade: 10, examGrade: 9, finalGrade: 8},
+  {subject: 'MSR', labGrade: 4, projectGrade: 7, examGrade: 8, finalGrade: 7},
+  {subject: 'ETC', labGrade: 7, projectGrade: 9, examGrade: 9, finalGrade: 8},
+  {subject: 'OOP', labGrade: 10, projectGrade: 6, examGrade: 7, finalGrade: 9},
+  {subject: 'CC', labGrade: 8, projectGrade: 8, examGrade: 5, finalGrade: 7},
 ];
 
 @Component({
@@ -20,7 +17,7 @@ const ELEMENT_DATA = [
 })
 export class StudentDashboardComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['subject', 'labGrade', 'projectGrade', 'examGrade', 'finalGrade'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }
