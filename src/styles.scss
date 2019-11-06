@@ -26,7 +26,6 @@ table { width: 100%; }
 .section-header {
     font-size: 12px;
     background-color: #ebebeb;
-    border-bottom: 1px solid $border-color;
     padding: 15px;
     .section-info {
         font-weight: 700;
@@ -39,6 +38,10 @@ table { width: 100%; }
     }
 }
 
+.section-border {
+    border-bottom: 1px solid $border-color;
+}
+
 .section-divider {
     border-color: $primary-color;
 }
@@ -47,3 +50,4 @@ table { width: 100%; }
     margin-left: 15px;
     margin-right: 15px;
 }
+
