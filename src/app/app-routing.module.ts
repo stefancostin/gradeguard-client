@@ -18,7 +18,7 @@ const routes: Routes = [
     loadChildren: './admin/admin.module#AdminModule'
   },
   {
-    path: 'professor',
+    path: 'profesor',
     loadChildren: './professor/professor.module#ProfessorModule'
   },
   {
