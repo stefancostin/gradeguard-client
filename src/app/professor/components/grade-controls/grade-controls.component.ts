@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Mode } from '../../models/mode.enum';
 
 @Component({
   selector: 'grd-grade-controls',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grade-controls.component.scss']
 })
 export class GradeControlsComponent implements OnInit {
+
+  Mode = Mode;
 
   studentList = [
     {id: 1, student: 'Stefan Costin'},
