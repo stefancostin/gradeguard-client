@@ -8,7 +8,7 @@ import { Year } from 'src/app/core/models/year.enum';
   styleUrls: ['./student-controls.component.scss']
 })
 export class StudentControlsComponent implements OnInit {
-  
+
   Semester = Semester;
   Year = Year;
 

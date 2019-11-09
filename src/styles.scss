@@ -4,6 +4,7 @@
 
 $primary-color: #673ab7;
 $border-color: #e2e2e2;
+$section-padding: 15px;
 
 body {
     font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -26,7 +27,7 @@ table { width: 100%; }
 .section-header {
     font-size: 12px;
     background-color: #ebebeb;
-    padding: 15px;
+    padding: $section-padding;
     .section-info {
         font-weight: 700;
         margin-bottom: 0;
@@ -40,6 +41,11 @@ table { width: 100%; }
 
 .section-border {
     border-bottom: 1px solid $border-color;
+}
+
+.section-padding {
+    padding-left: $section-padding;
+    padding-right: $section-padding;
 }
 
 .section-divider {

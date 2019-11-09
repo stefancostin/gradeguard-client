@@ -1,33 +1,100 @@
 <section class="container section-container shadow-sm mb-4">
-    <!-- Header -->
-    <article class="row section-header section-border">
-      <div class="col-sm-6">
-        <p class="section-info">Universitate:
-          <span class="section-info-value">
-            Universitatea Tehnica "Gh. Asachi" Iasi
-          </span>
-        </p>
+  <!-- Header -->
+  <article class="row section-header section-border">
+    <div class="col-sm-6">
+      <p class="section-info">Universitate:
+        <span class="section-info-value">
+          Universitatea Tehnica "Gh. Asachi" Iasi
+        </span>
+      </p>
+    </div>
+    <div class="col-sm-6 text-right">
+      <p class="section-info">Facultate:
+        <span class="section-info-value">
+          Automatica si Calculatoare
+        </span>
+      </p>
+    </div>
+  </article>
+
+  <!-- Student -->
+  <article class="row section-padding section-border mb-4">
+    <mat-form-field class="col-sm-3 col-md-2">
+      <mat-label>Studentul</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let student of studentList" [value]="student.id">
+          {{ student.student }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </article>
+
+  <!-- Grades -->
+  <article class="row section-padding section-border pb-2 mb-4">
+    <div class="col-sm-12">
+
+      <!-- Nota Laborator -->
+      <div class="row mb-3">
+        <mat-form-field class="col-sm-3 col-md-2">
+          <input matInput placeholder="Nota Laborator">
+        </mat-form-field>
+        <div class="col-sm-9 col-md-10 action-bar">
+          <button class="mr-2" mat-button color="primary">Adauga</button>
+          <button class="mr-2" mat-button color="primary">Modifica</button>
+          <button class="mr-2" mat-button color="warn">Sterge</button>
+        </div>
       </div>
-      <div class="col-sm-6 text-right">
-        <p class="section-info">Facultate:
-          <span class="section-info-value">
-            Automatica si Calculatoare
-          </span>
-        </p>
+
+      <mat-divider class="mb-4"></mat-divider>
+
+      <!-- Nota Examen -->
+      <div class="row mb-3">
+        <mat-form-field class="col-sm-3 col-md-2">
+          <input matInput placeholder="Nota Proiect">
+        </mat-form-field>
+        <div class="col-sm-9 col-md-10 action-bar">
+          <button class="mr-2" mat-button color="primary">Adauga</button>
+          <button class="mr-2" mat-button color="primary">Modifica</button>
+          <button class="mr-2" mat-button color="warn">Sterge</button>
+        </div>
       </div>
-    </article>
-  
-    <!-- Page Controls -->
-    <article class="row section-border">
-      <div class="col-sm-12">
-        
+
+      <mat-divider class="mb-4"></mat-divider>
+
+      <!-- Nota Examen -->
+      <div class="row mb-3">
+        <mat-form-field class="col-sm-3 col-md-2">
+          <input matInput placeholder="Nota Examen">
+        </mat-form-field>
+        <div class="col-sm-9 col-md-10 action-bar">
+          <button class="mr-2" mat-button color="primary">Adauga</button>
+          <button class="mr-2" mat-button color="primary">Modifica</button>
+          <button class="mr-2" mat-button color="warn">Sterge</button>
+        </div>
       </div>
-    </article>
-  
-    <!-- Content -->
-    <article class="row ml-0 mr-0 pb-2 mb-4">
-      <div class="col-sm-12">
-       
+
+      <mat-divider class="mb-4"></mat-divider>
+
+      <!-- Nota Finala -->
+      <div class="row mb-3">
+        <mat-form-field class="col-sm-3 col-md-2">
+          <input matInput placeholder="Nota Finala">
+        </mat-form-field>
+        <div class="col-sm-9 col-md-10 action-bar">
+          <button class="mr-2" mat-button color="primary">Adauga</button>
+          <button class="mr-2" mat-button color="primary">Modifica</button>
+          <button class="mr-2" mat-button color="warn">Sterge</button>
+        </div>
       </div>
-    </article>
-  </section>
+
+    </div>
+  </article>
+
+  <!-- Send -->
+  <article class="row section-padding mb-4">
+    <div class="col-sm-3 col-md-2">
+      <button mat-raised-button color="primary">Trimite</button>
+    </div>
+  </article>
+
+</section>

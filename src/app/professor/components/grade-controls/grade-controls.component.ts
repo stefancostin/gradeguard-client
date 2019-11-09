@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GradeControlsComponent implements OnInit {
 
+  studentList = [
+    {id: 1, student: 'Stefan Costin'},
+    {id: 2, student: 'Andreea Saratian'},
+    {id: 3, student: 'Andrei Popa'},
+    {id: 4, student: 'Karina Matrana'},
+    {id: 5, student: 'Dragos Popa'},
+    {id: 6, student: 'David Popa'},
+    {id: 7, student: 'Andra Botezatu'},
+  ];
+
   constructor() { }
 
   ngOnInit() {

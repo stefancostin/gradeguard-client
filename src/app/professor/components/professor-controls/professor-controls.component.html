@@ -29,7 +29,8 @@
     </mat-form-field>
 
     <div class="offset-sm-4 col-sm-2 offset-md-6 col-md-2 text-right">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" 
+          [routerLink]="['/profesor', 'note', {}]">
           <mat-icon aria-hidden="false" aria-label="add grade">add_circle_ou</mat-icon>
           <span class="ml-2">Adauga Nota</span>
         </button>
