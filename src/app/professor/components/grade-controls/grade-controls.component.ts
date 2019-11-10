@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Mode } from '../../models/mode.enum';
+import { Mode } from 'src/app/core/models/mode.enum';
 
 @Component({
   selector: 'grd-grade-controls',

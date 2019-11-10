@@ -8,11 +8,23 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav navbar-text-size pl-2 ml-4">
-      <li class="nav-item ml-4 active">
-        <a class="nav-link" href="#">Studenti<span class="sr-only">(current)</span></a>
+      <li class="nav-item ml-4">
+        <a class="nav-link" routerLinkActive="active-link"
+          [routerLink]="'/admin/modificari/' + AdminRoute[AdminView.SUBJECT]">
+          Materii
+        </a>
       </li>
       <li class="nav-item ml-2">
-        <a class="nav-link" href="#">Profesori</a>
+        <a class="nav-link" routerLinkActive="active-link"
+          [routerLink]="'/admin/modificari/' + AdminRoute[AdminView.PROFESSOR]">
+          Profesori
+        </a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" routerLinkActive="active-link"
+          [routerLink]="'/admin/modificari/' + AdminRoute[AdminView.STUDENT]">
+          Studenti
+        </a>
       </li>
     </ul>
   </div>

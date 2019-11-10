@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AdminRoute, AdminView } from '../../models/admin.enum';
 
 @Component({
   selector: 'grd-header',
@@ -9,6 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  AdminRoute = AdminRoute;
+  AdminView = AdminView;
   isHeaderHidden: boolean;
   routerSubscription: Subscription;
 

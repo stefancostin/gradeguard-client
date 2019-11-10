@@ -1,3 +1,41 @@
-<p>
-  admin-professors works!
-</p>
+<!-- Page Controls -->
+<article class="row section-border">
+  <div class="col-sm-12">
+    <grd-admin-controls [adminView]="AdminView.PROFESSOR"></grd-admin-controls>
+  </div>
+</article>
+
+<!-- Admin -- Students Table -->
+<article class="row section-padding mb-5">
+  <div class="col-sm-12">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Nume </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <!-- First Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Prenume </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <!-- Subject Column -->
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef> Materie </th>
+        <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+      </ng-container>
+
+      <!-- Year Column -->
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef> An </th>
+        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</article>

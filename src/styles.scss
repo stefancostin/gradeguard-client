@@ -18,6 +18,11 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 
 table { width: 100%; }
 
+.active-link {
+    font-weight: 500;
+    color: $primary-color !important;
+}
+
 .section-container {
     border: 1px solid $border-color;
     border-top: none;
@@ -56,4 +61,3 @@ table { width: 100%; }
     margin-left: 15px;
     margin-right: 15px;
 }
-

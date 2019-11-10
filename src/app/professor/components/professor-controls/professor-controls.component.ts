@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Mode } from '../../models/mode.enum';
+import { Mode } from 'src/app/core/models/mode.enum';
 import { Semester } from 'src/app/core/models/semester.enum';
 import { Year } from 'src/app/core/models/year.enum';
 

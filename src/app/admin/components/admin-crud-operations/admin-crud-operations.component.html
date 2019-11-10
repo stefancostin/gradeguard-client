@@ -1,0 +1,273 @@
+<section class="container section-container shadow-sm mb-4">
+  <!-- Header -->
+  <article class="row section-header section-border">
+    <div class="col-sm-6">
+      <p class="section-info">Universitate:
+        <span class="section-info-value">
+          Universitatea Tehnica "Gh. Asachi" Iasi
+        </span>
+      </p>
+    </div>
+    <div class="col-sm-6 text-right">
+      <p class="section-info">Facultate:
+        <span class="section-info-value">
+          Automatica si Calculatoare
+        </span>
+      </p>
+    </div>
+  </article>
+
+
+
+  <!-- -------------- -->
+  <!-- Professor View -->
+  <ng-container *ngIf="view === AdminView.PROFESSOR">
+
+    <!-- Professor Selection -->
+    <article class="row section-padding section-border mb-4">
+      <mat-form-field class="col-sm-3 col-md-2">
+        <mat-label>Profesor</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let professor of professorList" [value]="professor.id">
+            {{ professor.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </article>
+
+    <!-- Professor CRUD Operations -->
+    <article class="row section-padding section-border pb-2 mb-4">
+      <div class="col-sm-12">
+
+        <!-- Professor Last Name -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Nume profesor">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Professor First Name -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Prenume profesor">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Professor Email -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Email">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Subject -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <mat-label>Materie predata</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+                {{ subject.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+  </ng-container>
+
+
+
+  <!-- ------------ -->
+  <!-- Student View -->
+  <ng-container *ngIf="view === AdminView.STUDENT">
+
+    <!-- Student Selection -->
+    <article class="row section-padding section-border mb-4">
+      <mat-form-field class="col-sm-3 col-md-2">
+        <mat-label>Student</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let student of studentList" [value]="student.id">
+            {{ student.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </article>
+
+    <!-- Student CRUD Operations -->
+    <article class="row section-padding section-border pb-2 mb-4">
+      <div class="col-sm-12">
+
+        <!-- Student Last Name -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Nume student">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Student First Name -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Prenume student">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Student Email -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Email">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Anul -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <mat-label>Anul</mat-label>
+            <mat-select>
+              <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
+                {{ Year.I }}
+              </mat-option>
+              <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
+                {{ Year.II }}
+              </mat-option>
+              <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
+                {{ Year.III }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+  </ng-container>
+
+
+
+  <!-- ------------ -->
+  <!-- Subject View -->
+  <ng-container *ngIf="view === AdminView.SUBJECT">
+
+    <!-- Subject Selection -->
+    <article class="row section-padding section-border mb-4">
+      <mat-form-field class="col-sm-3 col-md-2">
+        <mat-label>Materie</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+            {{ subject.title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </article>
+
+    <!-- Subject CRUD Operations -->
+    <article class="row section-padding section-border pb-2 mb-4">
+      <div class="col-sm-12">
+
+        <!-- Subject Title -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Titlu materie">
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Anul -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <mat-label>Anul</mat-label>
+            <mat-select>
+              <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
+                {{ Year.I }}
+              </mat-option>
+              <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
+                {{ Year.II }}
+              </mat-option>
+              <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
+                {{ Year.III }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="col-sm-9 col-md-10 action-bar">
+            <button class="mr-2" mat-button color="primary">Adauga</button>
+            <button class="mr-2" mat-button color="primary">Modifica</button>
+            <button class="mr-2" mat-button color="warn">Sterge</button>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+  </ng-container>
+
+
+
+  
+  <!-- ---- -->
+  <!-- Send -->
+  <article class="row section-padding mb-4">
+    <div class="col-sm-3 col-md-2">
+      <button mat-raised-button color="primary">Trimite</button>
+    </div>
+  </article>
+
+</section>
