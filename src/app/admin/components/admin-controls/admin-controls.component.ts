@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AdminView, AdminAction, AdminRoute } from 'src/app/core/models/admin.enum';
 import { Mode } from 'src/app/core/models/mode.enum';
 import { Semester } from 'src/app/core/models/semester.enum';
-import { Year } from 'src/app/core/models/year.enum';
+import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 
 @Component({
   selector: 'grd-admin-controls',
@@ -18,7 +18,7 @@ export class AdminControlsComponent implements OnInit {
   AdminView = AdminView;
   Mode = Mode;
   Semester = Semester;
-  Year = Year;
+  Year = YearOfStudy;
 
   constructor() { }
 
@@ -26,8 +26,8 @@ export class AdminControlsComponent implements OnInit {
     this.setAdminAction();
   }
 
-  isYearDisabled(year: Year): boolean {
-    return year === Year.III;
+  isYearDisabled(year: YearOfStudy): boolean {
+    return year === YearOfStudy.III;
   }
 
   isSemDisabled(semester: Semester): boolean {

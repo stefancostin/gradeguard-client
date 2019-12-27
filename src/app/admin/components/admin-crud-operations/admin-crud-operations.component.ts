@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Mode } from 'src/app/core/models/mode.enum';
 import { Router } from '@angular/router';
 import { AdminView, AdminRoute } from 'src/app/core/models/admin.enum';
-import { Year } from 'src/app/core/models/year.enum';
+import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 
 @Component({
   selector: 'grd-admin-crud-operations',
@@ -14,7 +14,7 @@ export class AdminCrudOperationsComponent implements OnInit {
   view: AdminView;
   AdminView = AdminView;
   Mode = Mode;
-  Year = Year;
+  Year = YearOfStudy;
 
   professorList = [
     { id: 1, name: 'Stefan Costin' },
@@ -51,8 +51,8 @@ export class AdminCrudOperationsComponent implements OnInit {
     this.setCurrentPageView(currentPage);
   }
 
-  isYearDisabled(year: Year): boolean {
-    return year === Year.III;
+  isYearDisabled(year: YearOfStudy): boolean {
+    return year === YearOfStudy.III;
   }
 
   // isSemDisabled(semester: Semester): boolean {

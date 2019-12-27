@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Semester } from 'src/app/core/models/semester.enum';
-import { Year } from 'src/app/core/models/year.enum';
+import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 
 @Component({
   selector: 'grd-student-controls',
@@ -9,20 +9,33 @@ import { Year } from 'src/app/core/models/year.enum';
 })
 export class StudentControlsComponent implements OnInit {
 
-  Semester = Semester;
-  Year = Year;
+  @Input() semester: Semester;
+  @Input() yearOfStudy: YearOfStudy;
+  @Output() changeFilter: EventEmitter<any>;
 
-  constructor() { }
+  Semester = Semester;
+  YearOfStudy = YearOfStudy;
+
+  constructor() {
+    this.changeFilter = new EventEmitter();
+  }
 
   ngOnInit() {
   }
 
-  isYearDisabled(year: Year): boolean {
-    return year === Year.III;
+  changeStudentGradesFilter() {
+    const filter = { yearOfStudy: this.yearOfStudy, semester: this.semester };
+    this.changeFilter.emit(filter);
+  }
+
+  isYearDisabled(year: YearOfStudy): boolean {
+    // return year === YearOfStudy.III;
+    return false;
   }
 
   isSemDisabled(semester: Semester): boolean {
-    return semester === Semester.II;
+    // return semester === Semester.II;
+    return false;
   }
 
 }

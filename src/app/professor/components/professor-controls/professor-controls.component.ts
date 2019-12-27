@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mode } from 'src/app/core/models/mode.enum';
 import { Semester } from 'src/app/core/models/semester.enum';
-import { Year } from 'src/app/core/models/year.enum';
+import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 
 @Component({
   selector: 'grd-professor-controls',
@@ -12,15 +12,15 @@ export class ProfessorControlsComponent implements OnInit {
 
   Mode = Mode;
   Semester = Semester;
-  Year = Year;
+  Year = YearOfStudy;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  isYearDisabled(year: Year): boolean {
-    return year === Year.III;
+  isYearDisabled(year: YearOfStudy): boolean {
+    return year === YearOfStudy.III;
   }
 
   isSemDisabled(semester: Semester): boolean {

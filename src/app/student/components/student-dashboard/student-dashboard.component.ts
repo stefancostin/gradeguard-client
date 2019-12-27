@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../../services/student.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
+import { Semester } from 'src/app/core/models/semester.enum';
+import { ContextService } from 'src/app/core/services/context.service';
 
 const ELEMENT_DATA = [
   {subject: 'LTW', labGrade: 9, projectGrade: 10, examGrade: 5, finalGrade: 7},
@@ -17,12 +22,53 @@ const ELEMENT_DATA = [
 })
 export class StudentDashboardComponent implements OnInit {
 
-  displayedColumns: string[] = ['subject', 'labGrade', 'projectGrade', 'examGrade', 'finalGrade'];
-  dataSource = ELEMENT_DATA;
+  public displayedColumns: string[];
+  public dataSource: MatTableDataSource<any>;
+  public yearOfStudy: YearOfStudy;
+  public semester: Semester;
+  private studentId: number;
 
-  constructor() { }
+  constructor(private readonly studentService: StudentService,
+    private readonly contextService: ContextService) {
+
+    this.displayedColumns = [
+      'subjectCode',
+      'subjectName',
+      'gradeLaboratory',
+      'gradeProject',
+      'gradeExam',
+      'gradeFinal'
+    ];
+    this.dataSource = new MatTableDataSource();
+    this.semester = this.contextService.getSemester();
+
+    // HARDCODED
+    this.studentId = 1;
+  }
 
   ngOnInit() {
+    this.getStudentData();
+  }
+
+  public onFilterChange(filter) {
+    this.yearOfStudy = filter.yearOfStudy;
+    this.semester = filter.semester;
+
+    this.getStudentGrades();
+  }
+
+  private getStudentData() {
+    this.studentService.getStudentData(this.studentId).subscribe((response: any) => {
+      this.yearOfStudy = response.yearOfStudy;
+
+      this.getStudentGrades();
+    });
+  }
+
+  private getStudentGrades() {
+    this.studentService.getStudentGrades(this.studentId, this.yearOfStudy, this.semester).subscribe((response: any) => {
+      this.dataSource = new MatTableDataSource(response);
+    });
   }
 
 }
