@@ -17,77 +17,86 @@
     </div>
   </article>
 
-  <!-- Student -->
+  <!-- Subject && Student -->
   <article class="row section-padding section-border mb-4">
-    <mat-form-field class="col-sm-3 col-md-2">
-      <mat-label>Studentul</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let student of studentList" [value]="student.id">
-          {{ student.student }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </article>
-
-  <!-- Grades -->
-  <article class="row section-padding section-border pb-2 mb-4">
     <div class="col-sm-12">
 
-      <!-- Nota Laborator -->
       <div class="row mb-2">
-        <mat-form-field class="col-sm-3 col-md-2">
-          <input matInput placeholder="Nota Laborator">
-        </mat-form-field>
-        <div class="col-sm-9 col-md-10 action-bar">
-          <button class="mr-2" mat-button color="primary">Adauga</button>
-          <button class="mr-2" mat-button color="primary">Modifica</button>
-          <button class="mr-2" mat-button color="warn">Sterge</button>
+        <div class="col-sm-2 col-md-3">
+          <mat-form-field>
+            <mat-label>Materia</mat-label>
+            <mat-select [(ngModel)]="subjectSelected" (selectionChange)="changeSubject()">
+              <mat-option *ngFor="let subject of subjectList" [value]="subject">
+                {{ subject.acronym }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
-
-      <mat-divider class="pb-1 mb-3"></mat-divider>
-
-      <!-- Nota Examen -->
       <div class="row mb-2">
-        <mat-form-field class="col-sm-3 col-md-2">
-          <input matInput placeholder="Nota Proiect">
-        </mat-form-field>
-        <div class="col-sm-9 col-md-10 action-bar">
-          <button class="mr-2" mat-button color="primary">Adauga</button>
-          <button class="mr-2" mat-button color="primary">Modifica</button>
-          <button class="mr-2" mat-button color="warn">Sterge</button>
-        </div>
-      </div>
-
-      <mat-divider class="pb-1 mb-3"></mat-divider>
-
-      <!-- Nota Partial -->
-      <div class="row mb-2">
-        <mat-form-field class="col-sm-3 col-md-2">
-          <input matInput placeholder="Nota Partial">
-        </mat-form-field>
-        <div class="col-sm-9 col-md-10 action-bar">
-          <button class="mr-2" mat-button color="primary">Adauga</button>
-          <button class="mr-2" mat-button color="primary">Modifica</button>
-          <button class="mr-2" mat-button color="warn">Sterge</button>
-        </div>
-      </div>
-
-      <mat-divider class="pb-1 mb-3"></mat-divider>
-
-      <!-- Nota Examen -->
-      <div class="row mb-2">
-        <mat-form-field class="col-sm-3 col-md-2">
-          <input matInput placeholder="Nota Examen">
-        </mat-form-field>
-        <div class="col-sm-9 col-md-10 action-bar">
-          <button class="mr-2" mat-button color="primary">Adauga</button>
-          <button class="mr-2" mat-button color="primary">Modifica</button>
-          <button class="mr-2" mat-button color="warn">Sterge</button>
+        <div class="col-sm-3 col-md-2">
+          <mat-form-field>
+            <mat-label>Studentul</mat-label>
+            <mat-select [(ngModel)]="studentSelected" (selectionChange)="changeStudent()">
+              <mat-option *ngFor="let student of studentList" [value]="student">
+                {{ student.lastName }} {{ student.firstName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
 
     </div>
+  </article>
+
+  <!-- Grades -->
+  <article class="row section-padding section-border pb-2 mb-4">
+    <form class="col-sm-12" [formGroup]="form">
+
+      <!-- Laboratory Grade -->
+      <div class="row mb-2">
+        <div class="col-sm3 col-md-2">
+          <mat-form-field>
+            <input matInput type="number" placeholder="Nota Laborator" formControlName="gradeLaboratory">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-divider class="pb-1 mb-3"></mat-divider>
+
+      <!-- Proiject Grade -->
+      <div class="row mb-2">
+        <div class="col-sm-3 col-md-2">
+          <mat-form-field>
+            <input matInput type="number" placeholder="Nota Proiect" formControlName="gradeProject">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-divider class="pb-1 mb-3"></mat-divider>
+
+      <!-- Exam Grade -->
+      <div class="row mb-2">
+        <div class="col-sm-3 col-md-2">
+          <mat-form-field>
+            <input matInput type="number" placeholder="Nota Exmen" formControlName="gradeExam">
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <mat-divider class="pb-1 mb-3"></mat-divider>
+
+      <!-- Final Grade -->
+      <div class="row mb-2">
+        <div class="col-sm-3 col-md-2">
+          <mat-form-field>
+            <input matInput type="number" placeholder="Nota Finala" formControlName="gradeFinal">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </form>
   </article>
 
   <!-- Send -->

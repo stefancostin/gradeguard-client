@@ -2,34 +2,16 @@
   <div class="row mb-2">
 
     <mat-form-field class="col-sm-3 col-md-2">
-      <mat-label>Anul</mat-label>
-      <mat-select>
-        <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
-          {{ Year.I }}
-        </mat-option>
-        <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
-          {{ Year.II }}
-        </mat-option>
-        <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
-          {{ Year.III }}
+      <mat-label>Materia</mat-label>
+      <mat-select [(ngModel)]="subjectSelected" (selectionChange)="changeSubjectFilter()">
+        <mat-option *ngFor="let subject of subjectList" [value]="subject">
+          {{ subject.acronym }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="col-sm-3 col-md-2">
-      <mat-label>Semestrul</mat-label>
-      <mat-select>
-        <mat-option [value]="Semester.I" [disabled]="isSemDisabled(Semester.I)">
-          {{ Semester.I }}
-        </mat-option>
-        <mat-option [value]="Semester.II" [disabled]="isSemDisabled(Semester.II)">
-          {{ Semester.II }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div class="col-sm-6 col-md-8 text-right">
-        <button mat-raised-button color="primary" 
+    <div class="col-sm-9 col-md-10 text-right">
+        <button mat-raised-button color="primary"
           [routerLink]="['/profesor', 'note', {}]">
           <mat-icon aria-hidden="false" aria-label="add grade">add_circle_ou</mat-icon>
           <span class="ml-2">Adauga Nota</span>

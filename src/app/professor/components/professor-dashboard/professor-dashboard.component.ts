@@ -1,28 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-
-const ELEMENT_DATA = [
-  {subject: 'LTW', labGrade: 9, projectGrade: 10, examGrade: 5, finalGrade: 7},
-  {subject: 'SSC', labGrade: 10, projectGrade: 9, examGrade: 4, finalGrade: 8},
-  {subject: 'FPD', labGrade: 5, projectGrade: 10, examGrade: 9, finalGrade: 8},
-  {subject: 'MSR', labGrade: 4, projectGrade: 7, examGrade: 8, finalGrade: 7},
-  {subject: 'ETC', labGrade: 7, projectGrade: 9, examGrade: 9, finalGrade: 8},
-  {subject: 'OOP', labGrade: 10, projectGrade: 6, examGrade: 7, finalGrade: 9},
-  {subject: 'CC', labGrade: 8, projectGrade: 8, examGrade: 5, finalGrade: 7},
-];
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ProfessorService } from '../../services/professor.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'grd-professor-dashboard',
   templateUrl: './professor-dashboard.component.html',
   styleUrls: ['./professor-dashboard.component.scss']
 })
-export class ProfessorDashboardComponent implements OnInit {
+export class ProfessorDashboardComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['subject', 'labGrade', 'projectGrade', 'examGrade', 'finalGrade'];
-  dataSource = ELEMENT_DATA;
+  public dataSource: MatTableDataSource<any>;
+  public displayedColumns: string[];
+  public subjectList: Array<any>;
+  public subjectSelected: any;
+  private professorId: number;
+  private professorDataSubscription: Subscription;
+  private professorGradesSubscription: Subscription;
 
-  constructor() { }
+  constructor(private readonly professorService: ProfessorService) {
+
+    this.dataSource = new MatTableDataSource();
+    this.displayedColumns = [
+      'lastName',
+      'firstName',
+      'gradeLaboratory',
+      'gradeProject',
+      'gradeExam',
+      'gradeFinal'
+    ];
+    this.professorDataSubscription = new Subscription();
+    this.professorGradesSubscription = new Subscription();
+
+    // HARDCODED
+    this.professorId = 4;
+  }
 
   ngOnInit() {
+    this.getProfessorData();
+  }
+
+  ngOnDestroy() {
+    if (this.professorDataSubscription) {
+      this.professorDataSubscription.unsubscribe();
+    }
+    if (this.professorGradesSubscription) {
+      this.professorGradesSubscription.unsubscribe();
+    }
+  }
+
+  onFilterChange(filter) {
+    this.subjectSelected = filter.subjectSelected;
+    this.getProfessorGrades();
+  }
+
+  private getProfessorData() {
+    this.professorDataSubscription = this.professorService.getProfessorData(this.professorId)
+    .subscribe((response: any) => {
+      this.subjectList = response;
+      this.subjectSelected = (response && response.length) ? response[0] : null;
+
+      this.getProfessorGrades();
+    });
+  }
+
+  private getProfessorGrades() {
+    if (this.subjectSelected) {
+      this.professorGradesSubscription = this.professorService.getProfessorGrades(this.subjectSelected.id)
+        .subscribe((response: any) => {
+          this.dataSource = new MatTableDataSource(response);
+        });
+    }
   }
 
 }
