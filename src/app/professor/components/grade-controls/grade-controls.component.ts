@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Mode } from 'src/app/core/models/mode.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfessorService } from '../../services/professor.service';
-import { Subscriber, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'grd-grade-controls',
@@ -13,6 +14,7 @@ import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 export class GradeControlsComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
+  public mode: any;
   public Mode = Mode;
   public studentList: Array<any>;
   public studentSelected: any;
@@ -24,6 +26,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
   private yearOfStudy: YearOfStudy;
 
   constructor(private readonly fb: FormBuilder,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly professorService: ProfessorService) {
 
     this.professorDataSubscription = new Subscription();
@@ -34,6 +37,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getRoute();
     this.initForm();
     this.getProfessorData();
 
@@ -61,24 +65,33 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
 
   private getProfessorData() {
     this.professorDataSubscription = this.professorService.getProfessorData(this.professorId)
-    .subscribe((response: any) => {
-      this.subjectList = response;
-      this.subjectSelected = (response && response.length) ? response[0] : null;
+      .subscribe((response: any) => {
+        this.subjectList = response;
+        this.subjectSelected = (response && response.length) ? response[0] : null;
 
-      this.getStudentData();
-    });
+        this.getStudentData();
+      });
   }
 
   private getStudentData() {
     this.professorGradesSubscription = this.professorService.getProfessorGrades(this.subjectSelected.id)
-    .subscribe((response: any) => {
-      this.studentList = response;
-      this.studentSelected = (response && response.length) ? response[0] : null;
+      .subscribe((response: any) => {
+        this.studentList = response;
+        this.studentSelected = (response && response.length) ? response[0] : null;
 
-      if (this.studentSelected) {
-        this.patchGrades();
+        if (this.studentSelected) {
+          this.patchGrades();
+        }
+
+      });
+  }
+
+  private getRoute() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params.mode) {
+        this.mode = (this.mode === Mode.ADD) ? this.mode :
+          (this.mode === Mode.EDIT) ? this.mode : null;
       }
-
     });
   }
 
