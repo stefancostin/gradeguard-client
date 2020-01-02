@@ -23,7 +23,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
   private professorId: number;
   private professorDataSubscription: Subscription;
   private professorGradesSubscription: Subscription;
-  private yearOfStudy: YearOfStudy;
+  private professorSubmitSubscription: Subscription;
 
   constructor(private readonly fb: FormBuilder,
     private readonly activatedRoute: ActivatedRoute,
@@ -31,6 +31,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
 
     this.professorDataSubscription = new Subscription();
     this.professorGradesSubscription = new Subscription();
+    this.professorSubmitSubscription = new Subscription();
 
     // HARDCODED
     this.professorId = 4;
@@ -52,15 +53,29 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
     if (this.professorGradesSubscription) {
       this.professorGradesSubscription.unsubscribe();
     }
+    if (this.professorSubmitSubscription) {
+      this.professorSubmitSubscription.unsubscribe();
+    }
   }
 
   changeStudent() {
-    this.getStudentData();
+    this.form.patchValue({ studentId: this.studentSelected.id });
   }
 
   changeSubject() {
-    this.getStudentData();
+    this.getStudentList();
     this.form.patchValue({ subjectId: this.subjectSelected.id });
+  }
+
+  isDisabled() {
+    return this.form.invalid;
+  }
+
+  onSubmit() {
+    const gradesRequest = this.form.getRawValue();
+    this.professorSubmitSubscription = this.professorService.submitGrades(gradesRequest)
+      .subscribe((response: any) => {
+      });
   }
 
   private getProfessorData() {
@@ -69,11 +84,15 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
         this.subjectList = response;
         this.subjectSelected = (response && response.length) ? response[0] : null;
 
-        this.getStudentData();
+        if (this.subjectSelected) {
+          this.form.patchValue({ subjectId: this.subjectSelected.id });
+        }
+
+        this.getStudentList();
       });
   }
 
-  private getStudentData() {
+  private getStudentList() {
     this.professorGradesSubscription = this.professorService.getProfessorGrades(this.subjectSelected.id)
       .subscribe((response: any) => {
         this.studentList = response;
@@ -88,23 +107,25 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
 
   private getRoute() {
     this.activatedRoute.queryParams.subscribe(params => {
-      if (params && params.mode) {
-        this.mode = (this.mode === Mode.ADD) ? this.mode :
-          (this.mode === Mode.EDIT) ? this.mode : null;
+      const { mode } = params;
+
+      if (mode) {
+        this.mode = (mode === Mode.ADD) ? mode :
+          (mode === Mode.EDIT) ? mode : null;
       }
+
     });
   }
 
   private initForm() {
     this.form = this.fb.group({
-      id: [''],
-      studentId: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      subjectId: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      professorId: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      gradeExam: ['', [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
-      gradeFinal: ['', [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
-      gradeLaboratory: ['', [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
-      gradeProject: ['', [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]]
+      studentId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      subjectId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      professorId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      gradeExam: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
+      gradeFinal: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
+      gradeLaboratory: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
+      gradeProject: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]]
     });
   }
 

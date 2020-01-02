@@ -20,9 +20,9 @@ export class ProfessorService {
     return this.httpClient.get(url);
   }
 
-  public getStudentList(subjectId: number) {
-    const url = `${BASE_URL}/users/professors/subjects/${subjectId}/students`;
-    return this.httpClient.get(url);
+  public submitGrades(gradesRequest: any) {
+    const url = `${BASE_URL}/grades/submit`;
+    return this.httpClient.post(url, gradesRequest);
   }
 
 }

@@ -17,6 +17,16 @@
     </div>
   </article>
 
+  <!-- Back Button -->
+  <article class="row section-padding section-border mb-4">
+    <div class="col-sm-12">
+      <button mat-stroked-button color="accent" class="mb-3" [routerLink]="['/profesor']">
+        <mat-icon aria-hidden="false" aria-label="add grade">chevron_left</mat-icon>
+        <span>Back</span>
+      </button>
+    </div>
+  </article>
+
   <!-- Subject && Student -->
   <article class="row section-padding section-border mb-4">
     <div class="col-sm-12">
@@ -57,7 +67,7 @@
       <div class="row mb-2">
         <div class="col-sm3 col-md-2">
           <mat-form-field>
-            <input matInput type="number" placeholder="Nota Laborator" formControlName="gradeLaboratory">
+            <input matInput type="text" placeholder="Nota Laborator" formControlName="gradeLaboratory">
           </mat-form-field>
         </div>
       </div>
@@ -68,7 +78,7 @@
       <div class="row mb-2">
         <div class="col-sm-3 col-md-2">
           <mat-form-field>
-            <input matInput type="number" placeholder="Nota Proiect" formControlName="gradeProject">
+            <input matInput type="text" placeholder="Nota Proiect" formControlName="gradeProject">
           </mat-form-field>
         </div>
       </div>
@@ -79,7 +89,7 @@
       <div class="row mb-2">
         <div class="col-sm-3 col-md-2">
           <mat-form-field>
-            <input matInput type="number" placeholder="Nota Exmen" formControlName="gradeExam">
+            <input matInput type="text" placeholder="Nota Exmen" formControlName="gradeExam">
           </mat-form-field>
         </div>
       </div>
@@ -91,7 +101,7 @@
       <div class="row mb-2">
         <div class="col-sm-3 col-md-2">
           <mat-form-field>
-            <input matInput type="number" placeholder="Nota Finala" formControlName="gradeFinal">
+            <input matInput type="text" placeholder="Nota Finala" formControlName="gradeFinal">
           </mat-form-field>
         </div>
       </div>
@@ -102,7 +112,7 @@
   <!-- Send -->
   <article class="row section-padding mb-4">
     <div class="col-sm-3 col-md-2">
-      <button mat-raised-button color="primary">Trimite</button>
+      <button mat-raised-button color="primary" [disabled]="isDisabled()" (click)="onSubmit()">Salveaza</button>
     </div>
   </article>
 
