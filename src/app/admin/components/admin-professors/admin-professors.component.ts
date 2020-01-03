@@ -18,7 +18,7 @@ const ELEMENT_DATA = [
 })
 export class AdminProfessorsComponent implements OnInit {
 
-  displayedColumns: string[] = ['lastName', 'firstName', 'subject', 'year'];
+  displayedColumns: string[] = ['lastName', 'firstName', 'subject', 'year', 'actions'];
   dataSource = ELEMENT_DATA;
 
   AdminView = AdminView;
@@ -26,6 +26,14 @@ export class AdminProfessorsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  removeProfessor(professorId: any) {
+    const deletionConfirmed = confirm('Esti sigur ca vrei sa faci aceasta actiune?');
+    // if (deletionConfirmed) {
+    //   this.professorService.removeGrade(gradeId).subscribe((response: any) => {
+    //   });
+    // }
   }
 
 }

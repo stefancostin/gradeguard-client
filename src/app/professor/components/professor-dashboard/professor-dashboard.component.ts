@@ -56,12 +56,12 @@ export class ProfessorDashboardComponent implements OnInit, OnDestroy {
 
   private getProfessorData() {
     this.professorDataSubscription = this.professorService.getProfessorData(this.professorId)
-    .subscribe((response: any) => {
-      this.subjectList = response;
-      this.subjectSelected = (response && response.length) ? response[0] : null;
+      .subscribe((response: any) => {
+        this.subjectList = response;
+        this.subjectSelected = (response && response.length) ? response[0] : null;
 
-      this.getProfessorGrades();
-    });
+        this.getProfessorGrades();
+      });
   }
 
   private getProfessorGrades() {
