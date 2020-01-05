@@ -38,7 +38,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getRoute();
+    this.getRouteParams();
     this.initForm();
     this.getProfessorData();
 
@@ -105,7 +105,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getRoute() {
+  private getRouteParams() {
     this.activatedRoute.queryParams.subscribe(params => {
       const { mode } = params;
 

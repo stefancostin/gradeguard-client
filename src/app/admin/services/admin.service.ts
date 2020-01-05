@@ -14,4 +14,14 @@ export class AdminService {
     return this.httpClient.get(url);
   }
 
+  public getAllSubjectsList() {
+    const url = `${BASE_URL}/subjects`;
+    return this.httpClient.get(url);
+  }
+
+  public submitProfessorData(requestBody: any) {
+    const url = `${BASE_URL}/users/admin/professors`;
+    return this.httpClient.post(url, requestBody);
+  }
+
 }

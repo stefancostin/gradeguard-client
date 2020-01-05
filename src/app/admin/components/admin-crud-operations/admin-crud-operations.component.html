@@ -21,13 +21,13 @@
 
   <!-- -------------- -->
   <!-- Professor View -->
-  <ng-container *ngIf="view === AdminView.PROFESSOR">
+  <form *ngIf="view === AdminView.PROFESSOR" [formGroup]="professorForm">
 
     <!-- Professor Selection -->
     <article class="row section-padding section-border mb-4">
       <mat-form-field class="col-sm-3 col-md-2">
         <mat-label>Profesor</mat-label>
-        <mat-select>
+        <mat-select [disabled]="actionMode === Mode.ADD">
           <mat-option *ngFor="let professor of professorList" [value]="professor.id">
             {{ professor.name }}
           </mat-option>
@@ -42,7 +42,7 @@
         <!-- Professor Last Name -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Nume profesor">
+            <input matInput placeholder="Nume profesor" formControlName="lastName">
           </mat-form-field>
         </div>
 
@@ -51,7 +51,7 @@
         <!-- Professor First Name -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Prenume profesor">
+            <input matInput placeholder="Prenume profesor" formControlName="firstName">
           </mat-form-field>
         </div>
 
@@ -60,7 +60,16 @@
         <!-- Professor Email -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Professor Password -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput type="password" placeholder="Password" formControlName="password">
           </mat-form-field>
         </div>
 
@@ -70,9 +79,9 @@
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
             <mat-label>Materie predata</mat-label>
-            <mat-select>
+            <mat-select formControlName="subjectsIdList" multiple>
               <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-                {{ subject.title }}
+                {{ subject.acronym }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -81,13 +90,13 @@
       </div>
     </article>
 
-  </ng-container>
+  </form>
 
 
 
   <!-- ------------ -->
   <!-- Student View -->
-  <ng-container *ngIf="view === AdminView.STUDENT">
+  <form *ngIf="view === AdminView.STUDENT" [formGroup]="studentForm">
 
     <!-- Student Selection -->
     <article class="row section-padding section-border mb-4">
@@ -108,7 +117,7 @@
         <!-- Student Last Name -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Nume student">
+            <input matInput placeholder="Nume student" formControlName="lastName">
           </mat-form-field>
         </div>
 
@@ -117,7 +126,7 @@
         <!-- Student First Name -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Prenume student">
+            <input matInput placeholder="Prenume student" formControlName="firstName">
           </mat-form-field>
         </div>
 
@@ -126,9 +135,18 @@
         <!-- Student Email -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" formControlName="email">
           </mat-form-field>
         </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Student Password -->
+        <div class="row mb-2">
+            <mat-form-field class="col-sm-3 col-md-2">
+              <input matInput type="password" placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
@@ -136,14 +154,14 @@
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
             <mat-label>Anul</mat-label>
-            <mat-select>
-              <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
+            <mat-select formControlName="yearOfStudy">
+              <mat-option [value]="Year.I">
                 {{ Year.I }}
               </mat-option>
-              <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
+              <mat-option [value]="Year.II">
                 {{ Year.II }}
               </mat-option>
-              <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
+              <mat-option [value]="Year.III">
                 {{ Year.III }}
               </mat-option>
             </mat-select>
@@ -153,13 +171,13 @@
       </div>
     </article>
 
-  </ng-container>
+  </form>
 
 
 
   <!-- ------------ -->
   <!-- Subject View -->
-  <ng-container *ngIf="view === AdminView.SUBJECT">
+  <form *ngIf="view === AdminView.SUBJECT" [formGroup]="subjectForm">
 
     <!-- Subject Selection -->
     <article class="row section-padding section-border mb-4">
@@ -167,7 +185,7 @@
         <mat-label>Materie</mat-label>
         <mat-select>
           <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-            {{ subject.title }}
+            {{ subject.acronym }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -191,13 +209,13 @@
           <mat-form-field class="col-sm-3 col-md-2">
             <mat-label>Anul</mat-label>
             <mat-select>
-              <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
+              <mat-option [value]="Year.I">
                 {{ Year.I }}
               </mat-option>
-              <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
+              <mat-option [value]="Year.II">
                 {{ Year.II }}
               </mat-option>
-              <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
+              <mat-option [value]="Year.III">
                 {{ Year.III }}
               </mat-option>
             </mat-select>
@@ -207,7 +225,7 @@
       </div>
     </article>
 
-  </ng-container>
+  </form>
 
 
 
@@ -216,7 +234,7 @@
   <!-- Send -->
   <article class="row section-padding mb-4">
     <div class="col-sm-3 col-md-2">
-      <button mat-raised-button color="primary">Salveaza</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">Salveaza</button>
     </div>
   </article>
 
