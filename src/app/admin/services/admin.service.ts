@@ -24,4 +24,9 @@ export class AdminService {
     return this.httpClient.post(url, requestBody);
   }
 
+  public removeUser(userId: number) {
+    const url = `${BASE_URL}/users/${userId}`;
+    return this.httpClient.delete(url);
+  }
+
 }

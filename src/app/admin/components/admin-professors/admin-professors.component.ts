@@ -25,6 +25,7 @@ export class AdminProfessorsComponent implements OnInit, OnDestroy {
   public displayedColumns: string[];
   public AdminView = AdminView;
   private professorsListSubscription: Subscription;
+  private professorsRemoveSubscription: Subscription;
 
   constructor(private readonly adminService: AdminService) {
 
@@ -47,14 +48,19 @@ export class AdminProfessorsComponent implements OnInit, OnDestroy {
     if (this.professorsListSubscription) {
       this.professorsListSubscription.unsubscribe();
     }
+    if (this.professorsRemoveSubscription) {
+      this.professorsRemoveSubscription.unsubscribe();
+    }
   }
 
   public removeProfessor(professorId: any) {
     const deletionConfirmed = confirm('Esti sigur ca vrei sa faci aceasta actiune?');
-    // if (deletionConfirmed) {
-    //   this.professorService.removeGrade(gradeId).subscribe((response: any) => {
-    //   });
-    // }
+    if (deletionConfirmed) {
+      this.professorsRemoveSubscription = this.adminService.removeUser(professorId)
+        .subscribe((response: any) => {
+          this.getProfessorsList();
+        });
+    }
   }
 
   private getProfessorsList() {
