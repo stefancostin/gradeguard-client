@@ -28,14 +28,4 @@ export class StudentControlsComponent implements OnInit {
     this.changeFilter.emit(filter);
   }
 
-  isYearDisabled(year: YearOfStudy): boolean {
-    // return year === YearOfStudy.III;
-    return false;
-  }
-
-  isSemDisabled(semester: Semester): boolean {
-    // return semester === Semester.II;
-    return false;
-  }
-
 }

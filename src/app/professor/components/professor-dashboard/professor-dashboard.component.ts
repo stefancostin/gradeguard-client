@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProfessorService } from '../../services/professor.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'grd-professor-dashboard',
@@ -18,7 +19,8 @@ export class ProfessorDashboardComponent implements OnInit, OnDestroy {
   private professorDataSubscription: Subscription;
   private professorGradesSubscription: Subscription;
 
-  constructor(private readonly professorService: ProfessorService) {
+  constructor(private readonly professorService: ProfessorService,
+    private readonly alertService: AlertService) {
 
     this.dataSource = new MatTableDataSource();
     this.displayedColumns = [
@@ -61,6 +63,8 @@ export class ProfessorDashboardComponent implements OnInit, OnDestroy {
         this.subjectSelected = (response && response.length) ? response[0] : null;
 
         this.getProfessorGrades();
+      }, (error) => {
+        this.alertService.danger(error.message);
       });
   }
 
@@ -69,6 +73,8 @@ export class ProfessorDashboardComponent implements OnInit, OnDestroy {
       this.professorGradesSubscription = this.professorService.getProfessorGrades(this.subjectSelected.id)
         .subscribe((response: any) => {
           this.dataSource = new MatTableDataSource(response);
+        }, (error) => {
+          this.alertService.danger(error.message);
         });
     }
   }

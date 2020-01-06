@@ -34,9 +34,9 @@
         <td mat-cell *matCellDef="let element">
           <ng-container *ngFor="let subject of element.subjectsTaught; let i = index">
             <span class="font-weight-bold">{{subject.acronym}} </span>
-            <span class="text-secondary">(Anul {{subject.yearOfStudy}},
-              Semestrul {{subject.semester}})</span>
-            <span *ngIf="!(i === (element.subjectsTaught.length - 1))">, </span>
+            <span class="text-secondary">(An. {{subject.yearOfStudy}},
+              Sem. {{subject.semester}})</span>
+            <span *ngIf="!(i === (element.subjectsTaught.length - 1))" class="text-secondary">, </span>
           </ng-container>
         </td>
       </ng-container>
@@ -45,6 +45,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element">
+          <button mat-button color="primary" (click)="editProfessor(element.id)">Edit</button>
           <button mat-button color="warn" (click)="removeProfessor(element.id)">Sterge</button>
         </td>
       </ng-container>

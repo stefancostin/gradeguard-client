@@ -5,6 +5,7 @@ import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 import { Semester } from 'src/app/core/models/semester.enum';
 import { ContextService } from 'src/app/core/services/context.service';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'grd-student-dashboard',
@@ -22,7 +23,8 @@ export class StudentDashboardComponent implements OnInit, OnDestroy {
   private studentGradesSubscription: Subscription;
 
   constructor(private readonly studentService: StudentService,
-    private readonly contextService: ContextService) {
+    private readonly contextService: ContextService,
+    private readonly alertService: AlertService) {
 
     this.dataSource = new MatTableDataSource();
     this.displayedColumns = [
@@ -67,6 +69,8 @@ export class StudentDashboardComponent implements OnInit, OnDestroy {
       this.yearOfStudy = response.yearOfStudy;
 
       this.getStudentGrades();
+    }, (error) => {
+      this.alertService.danger(error.message);
     });
   }
 
@@ -74,6 +78,8 @@ export class StudentDashboardComponent implements OnInit, OnDestroy {
     this.studentGradesSubscription = this.studentService.getStudentGrades(this.studentId, this.yearOfStudy, this.semester)
     .subscribe((response: any) => {
       this.dataSource = new MatTableDataSource(response);
+    }, (error) => {
+      this.alertService.danger(error.message);
     });
   }
 

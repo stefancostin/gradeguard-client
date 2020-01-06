@@ -5,6 +5,7 @@ import { ProfessorService } from '../../services/professor.service';
 import { Subscription } from 'rxjs';
 import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'grd-grade-controls',
@@ -27,7 +28,8 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
 
   constructor(private readonly fb: FormBuilder,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly professorService: ProfessorService) {
+    private readonly professorService: ProfessorService,
+    private readonly alertService: AlertService) {
 
     this.professorDataSubscription = new Subscription();
     this.professorGradesSubscription = new Subscription();
@@ -75,6 +77,9 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
     const gradesRequest = this.form.getRawValue();
     this.professorSubmitSubscription = this.professorService.submitGrades(gradesRequest)
       .subscribe((response: any) => {
+        this.alertService.success('Grades have been updated successfully.');
+      }, (error) => {
+        this.alertService.danger(error.message);
       });
   }
 
@@ -89,6 +94,8 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
         }
 
         this.getStudentList();
+      }, (error) => {
+        this.alertService.danger(error.message);
       });
   }
 
@@ -102,6 +109,8 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
           this.patchGrades();
         }
 
+      }, (error) => {
+        this.alertService.danger(error.message);
       });
   }
 

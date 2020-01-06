@@ -1,34 +1,35 @@
 <div class="container pt-2 mt-3">
   <div class="row mb-2">
 
-    <mat-form-field *ngIf="adminView !== AdminView.PROFESSOR" class="col-sm-3 col-md-2">
+    <mat-form-field *ngIf="adminView === AdminView.STUDENT || adminView === AdminView.SUBJECT" class="col-sm-3 col-md-2">
       <mat-label>Anul</mat-label>
-      <mat-select>
-        <mat-option [value]="Year.I" [disabled]="isYearDisabled(Year.I)">
+      <mat-select [(ngModel)]="yearOfStudySelected" (selectionChange)="updateYearOfStudy()">
+        <mat-option [value]="Year.I">
           {{ Year.I }}
         </mat-option>
-        <mat-option [value]="Year.II" [disabled]="isYearDisabled(Year.II)">
+        <mat-option [value]="Year.II">
           {{ Year.II }}
         </mat-option>
-        <mat-option [value]="Year.III" [disabled]="isYearDisabled(Year.III)">
+        <mat-option [value]="Year.III">
           {{ Year.III }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field *ngIf="adminView !== AdminView.PROFESSOR" class="col-sm-3 col-md-2">
+    <mat-form-field *ngIf="adminView === AdminView.SUBJECT" class="col-sm-3 col-md-2">
       <mat-label>Semestrul</mat-label>
-      <mat-select>
-        <mat-option [value]="Semester.I" [disabled]="isSemDisabled(Semester.I)">
+      <mat-select [(ngModel)]="semesterSelected" (selectionChange)="updateSemester()">
+        <mat-option [value]="Semester.I">
           {{ Semester.I }}
         </mat-option>
-        <mat-option [value]="Semester.II" [disabled]="isSemDisabled(Semester.II)">
+        <mat-option [value]="Semester.II">
           {{ Semester.II }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    
+
     <div *ngIf="adminView === AdminView.PROFESSOR" class="offset-sm-6 offset-md-4 pb-1 mb-5"></div>
+    <div *ngIf="adminView === AdminView.STUDENT" class="offset-sm-3 offset-md-2 pb-1 mb-5"></div>
 
     <div class="col-sm-6 col-md-8 text-right">
       <button mat-raised-button color="primary" [routerLink]="['/admin/modificari', opRoute, {}]">

@@ -23,18 +23,6 @@
   <!-- Professor View -->
   <form *ngIf="view === AdminView.PROFESSOR" [formGroup]="professorForm">
 
-    <!-- Professor Selection -->
-    <article class="row section-padding section-border mb-4">
-      <mat-form-field class="col-sm-3 col-md-2">
-        <mat-label>Profesor</mat-label>
-        <mat-select [disabled]="actionMode === Mode.ADD">
-          <mat-option *ngFor="let professor of professorList" [value]="professor.id">
-            {{ professor.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </article>
-
     <!-- Professor CRUD Operations -->
     <article class="row section-padding section-border pb-2 mb-4">
       <div class="col-sm-12">
@@ -72,6 +60,12 @@
             <input matInput type="password" placeholder="Password" formControlName="password">
           </mat-form-field>
         </div>
+        <div *ngIf="this.actionMode === Mode.EDIT" class="row mb-2 form-small-print">
+          <div class="col-sm-6 col-md-6">
+            <small class="text-secondary">
+              *Only supply password if admin wishes to change the current one.</small>
+          </div>
+        </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
@@ -97,18 +91,6 @@
   <!-- ------------ -->
   <!-- Student View -->
   <form *ngIf="view === AdminView.STUDENT" [formGroup]="studentForm">
-
-    <!-- Student Selection -->
-    <article class="row section-padding section-border mb-4">
-      <mat-form-field class="col-sm-3 col-md-2">
-        <mat-label>Student</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let student of studentList" [value]="student.id">
-            {{ student.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </article>
 
     <!-- Student CRUD Operations -->
     <article class="row section-padding section-border pb-2 mb-4">
@@ -143,10 +125,16 @@
 
         <!-- Student Password -->
         <div class="row mb-2">
-            <mat-form-field class="col-sm-3 col-md-2">
-              <input matInput type="password" placeholder="Password" formControlName="password">
-            </mat-form-field>
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput type="password" placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </div>
+        <div *ngIf="this.actionMode === Mode.EDIT" class="row mb-2 form-small-print">
+          <div class="col-sm-6 col-md-6">
+            <small class="text-secondary">
+              *Only supply password if admin wishes to change the current one.</small>
           </div>
+        </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
@@ -179,36 +167,33 @@
   <!-- Subject View -->
   <form *ngIf="view === AdminView.SUBJECT" [formGroup]="subjectForm">
 
-    <!-- Subject Selection -->
-    <article class="row section-padding section-border mb-4">
-      <mat-form-field class="col-sm-3 col-md-2">
-        <mat-label>Materie</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-            {{ subject.acronym }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </article>
-
     <!-- Subject CRUD Operations -->
     <article class="row section-padding section-border pb-2 mb-4">
       <div class="col-sm-12">
 
-        <!-- Subject Title -->
+        <!-- Subject Name -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Titlu materie">
+            <input matInput placeholder="Titlu materie" formControlName="name">
           </mat-form-field>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
-        <!-- Anul -->
+        <!-- Subject Acronym -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <input matInput placeholder="Titlu materie" formControlName="acronym">
+          </mat-form-field>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Year Of Study -->
         <div class="row mb-2">
           <mat-form-field class="col-sm-3 col-md-2">
             <mat-label>Anul</mat-label>
-            <mat-select>
+            <mat-select formControlName="yearOfStudy">
               <mat-option [value]="Year.I">
                 {{ Year.I }}
               </mat-option>
@@ -217,6 +202,23 @@
               </mat-option>
               <mat-option [value]="Year.III">
                 {{ Year.III }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <mat-divider class="pb-1 mb-3"></mat-divider>
+
+        <!-- Semester -->
+        <div class="row mb-2">
+          <mat-form-field class="col-sm-3 col-md-2">
+            <mat-label>Semestrul</mat-label>
+            <mat-select formControlName="semester">
+              <mat-option [value]="Semester.I">
+                {{ Semester.I }}
+              </mat-option>
+              <mat-option [value]="Semester.II">
+                {{ Semester.II }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -234,7 +236,7 @@
   <!-- Send -->
   <article class="row section-padding mb-4">
     <div class="col-sm-3 col-md-2">
-      <button mat-raised-button color="primary" (click)="onSubmit()">Salveaza</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="isSubmitDisabled()">Salveaza</button>
     </div>
   </article>
 

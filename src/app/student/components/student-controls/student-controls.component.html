@@ -4,13 +4,13 @@
     <mat-form-field class="col-sm-3 col-md-2">
       <mat-label>Anul</mat-label>
       <mat-select [(ngModel)]="yearOfStudy" (selectionChange)="changeStudentGradesFilter()">
-        <mat-option [value]="YearOfStudy.I" [disabled]="isYearDisabled(YearOfStudy.I)">
+        <mat-option [value]="YearOfStudy.I">
           {{ YearOfStudy.I }}
         </mat-option>
-        <mat-option [value]="YearOfStudy.II" [disabled]="isYearDisabled(YearOfStudy.II)">
+        <mat-option [value]="YearOfStudy.II">
           {{ YearOfStudy.II }}
         </mat-option>
-        <mat-option [value]="YearOfStudy.III" [disabled]="isYearDisabled(YearOfStudy.III)">
+        <mat-option [value]="YearOfStudy.III">
           {{ YearOfStudy.III }}
         </mat-option>
       </mat-select>
@@ -19,10 +19,10 @@
     <mat-form-field class="col-sm-3 col-md-2">
       <mat-label>Semestrul</mat-label>
       <mat-select [(ngModel)]="semester" (selectionChange)="changeStudentGradesFilter()">
-        <mat-option [value]="Semester.I" [disabled]="isSemDisabled(Semester.I)">
+        <mat-option [value]="Semester.I">
           {{ Semester.I }}
         </mat-option>
-        <mat-option [value]="Semester.II" [disabled]="isSemDisabled(Semester.II)">
+        <mat-option [value]="Semester.II">
           {{ Semester.II }}
         </mat-option>
       </mat-select>

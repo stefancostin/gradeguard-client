@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AdminView } from 'src/app/core/models/admin.enum';
+import { AdminView, AdminRoute } from 'src/app/core/models/admin.enum';
 import { AdminService } from '../../services/admin.service';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Mode } from 'src/app/core/models/mode.enum';
+import { AlertService } from 'ngx-alerts';
 
 const ELEMENT_DATA = [
   { lastName: 'Pinzariu', firstName: 'Sorin', subject: 'LTW', year: 'I' },
@@ -21,13 +24,17 @@ const ELEMENT_DATA = [
 })
 export class AdminProfessorsComponent implements OnInit, OnDestroy {
 
+  public AdminRoute = AdminRoute;
+  public AdminView = AdminView;
+  public Mode = Mode;
   public dataSource: MatTableDataSource<any>;
   public displayedColumns: string[];
-  public AdminView = AdminView;
   private professorsListSubscription: Subscription;
   private professorsRemoveSubscription: Subscription;
 
-  constructor(private readonly adminService: AdminService) {
+  constructor(private readonly router: Router,
+    private readonly adminService: AdminService,
+    private readonly alertService: AlertService) {
 
     this.dataSource = new MatTableDataSource();
     this.displayedColumns = [
@@ -38,6 +45,7 @@ export class AdminProfessorsComponent implements OnInit, OnDestroy {
       'actions'
     ];
     this.professorsListSubscription = new Subscription();
+    this.professorsRemoveSubscription = new Subscription();
   }
 
   ngOnInit() {
@@ -53,20 +61,31 @@ export class AdminProfessorsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removeProfessor(professorId: any) {
+  public editProfessor(professorId: number) {
+    this.router.navigateByUrl(`/admin/modificari/${AdminRoute[AdminView.PROFESSOR]}?mode=${Mode.EDIT}&professorId=${professorId}`);
+  }
+
+  public removeProfessor(professorId: number) {
     const deletionConfirmed = confirm('Esti sigur ca vrei sa faci aceasta actiune?');
     if (deletionConfirmed) {
       this.professorsRemoveSubscription = this.adminService.removeUser(professorId)
         .subscribe((response: any) => {
+          this.alertService.info('Professor entity has been removed.');
           this.getProfessorsList();
+
+        }, (error) => {
+          this.alertService.danger(error.message);
         });
     }
   }
 
   private getProfessorsList() {
-    this.professorsListSubscription = this.adminService.getProfessorsList().subscribe((response: any) => {
-      this.dataSource = new MatTableDataSource(response);
-    });
+    this.professorsListSubscription = this.adminService.getProfessorsList()
+      .subscribe((response: any) => {
+        this.dataSource = new MatTableDataSource(response);
+      }, (error) => {
+        this.alertService.danger(error.message);
+      });
   }
 
 }

@@ -1,7 +1,10 @@
 <!-- Page Controls -->
 <article class="row section-border">
   <div class="col-sm-12">
-    <grd-admin-controls [adminView]="AdminView.STUDENT"></grd-admin-controls>
+    <grd-admin-controls
+      [adminView]="AdminView.STUDENT"
+      (yearOfStudyEvent)="onYearOfStudyUpdate($event)">
+    </grd-admin-controls>
   </div>
 </article>
 
@@ -22,11 +25,26 @@
         <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
       </ng-container>
 
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
       <!-- Year Column -->
       <ng-container matColumnDef="year">
         <th mat-header-cell *matHeaderCellDef> An </th>
-        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.yearOfStudy}} </td>
       </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button color="primary" (click)="editStudent(element.id)">Edit</button>
+            <button mat-button color="warn" (click)="removeStudent(element.id)">Sterge</button>
+          </td>
+        </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
