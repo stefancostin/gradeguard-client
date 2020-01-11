@@ -12,7 +12,7 @@ export class StudentService {
   constructor(private readonly httpClient: HttpClient) { }
 
   public getStudentData(studentId: number) {
-    const url = `${BASE_URL}/users/student-data/${studentId}`;
+    const url = `${BASE_URL}/users/students/${studentId}`;
     return this.httpClient.get(url);
   }
 
