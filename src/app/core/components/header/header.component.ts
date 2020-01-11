@@ -1,38 +1,28 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, RouterEvent } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AdminRoute, AdminView } from '../../models/admin.enum';
+import { ContextService } from '../../services/context.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'grd-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   AdminRoute = AdminRoute;
   AdminView = AdminView;
-  isHeaderHidden: boolean;
-  routerSubscription: Subscription;
+  userName: string;
 
-  constructor(private readonly router: Router) { }
+  constructor(private readonly router: Router,
+    private readonly contextService: ContextService) { }
 
   ngOnInit() {
-    // hide HeaderComponent when user is on Login page
-    this.routerSubscription = this.router.events.pipe(
-      filter((event: RouterEvent) => {
-        return event instanceof NavigationEnd;
-      })
-    ).subscribe((event: RouterEvent) => {
-      const url = event ? event.url : null;
-      this.isHeaderHidden = (url === '/login') ? true : false;
-    });
+    this.userName = this.contextService.getUserName();
   }
 
-  ngOnDestroy() {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
+  logout() {
+    this.contextService.removeAuthentication();
+    this.router.navigateByUrl('/login');
   }
 
 }

@@ -38,9 +38,7 @@ export class StudentDashboardComponent implements OnInit, OnDestroy {
     this.semester = this.contextService.getSemester();
     this.studentDataSubscription = new Subscription();
     this.studentGradesSubscription = new Subscription();
-
-    // HARDCODED
-    this.studentId = 1;
+    this.studentId = this.contextService.getUserId();
   }
 
   ngOnInit() {

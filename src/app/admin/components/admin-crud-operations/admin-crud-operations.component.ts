@@ -32,26 +32,6 @@ export class AdminCrudOperationsComponent implements OnInit, OnDestroy {
   private studentSubscription: Subscription;
   private subjectSubscription: Subscription;
 
-  professorList = [
-    { id: 1, name: 'Stefan Costin' },
-    { id: 2, name: 'Andreea Saratian' },
-    { id: 3, name: 'Andrei Popa' },
-    { id: 4, name: 'Karina Matrana' },
-    { id: 5, name: 'Dragos Popa' },
-    { id: 6, name: 'David Popa' },
-    { id: 7, name: 'Andra Botezatu' },
-  ];
-
-  studentList = [
-    { id: 1, name: 'Stefan Costin' },
-    { id: 2, name: 'Andreea Saratian' },
-    { id: 3, name: 'Andrei Popa' },
-    { id: 4, name: 'Karina Matrana' },
-    { id: 5, name: 'Dragos Popa' },
-    { id: 6, name: 'David Popa' },
-    { id: 7, name: 'Andra Botezatu' },
-  ];
-
   constructor(private readonly fb: FormBuilder,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,

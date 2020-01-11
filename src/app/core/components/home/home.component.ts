@@ -10,28 +10,10 @@ import { Role } from '../../models/role.enum';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private readonly router: Router,
-    private readonly contextService: ContextService) { }
+  constructor(private readonly contextService: ContextService) { }
 
   ngOnInit() {
-    this.redirect();
-  }
-
-  private redirect(): void {
-    const role = this.contextService.getUserRole();
-    switch (role) {
-      case Role.ADMIN:
-        this.router.navigateByUrl('/admin');
-        break;
-      case Role.PROFESSOR:
-        this.router.navigateByUrl('/profesor');
-        break;
-      case Role.STUDENT:
-        this.router.navigateByUrl('/student');
-        break;
-      default:
-        this.router.navigateByUrl('/login');
-    }
+    this.contextService.redirect();
   }
 
 }

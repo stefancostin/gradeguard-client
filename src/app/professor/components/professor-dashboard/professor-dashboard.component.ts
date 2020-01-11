@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ProfessorService } from '../../services/professor.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertService } from 'ngx-alerts';
+import { ContextService } from 'src/app/core/services/context.service';
 
 @Component({
   selector: 'grd-professor-dashboard',
@@ -20,6 +21,7 @@ export class ProfessorDashboardComponent implements OnInit, OnDestroy {
   private professorGradesSubscription: Subscription;
 
   constructor(private readonly professorService: ProfessorService,
+    private readonly contextService: ContextService,
     private readonly alertService: AlertService) {
 
     this.dataSource = new MatTableDataSource();
@@ -33,9 +35,7 @@ export class ProfessorDashboardComponent implements OnInit, OnDestroy {
     ];
     this.professorDataSubscription = new Subscription();
     this.professorGradesSubscription = new Subscription();
-
-    // HARDCODED
-    this.professorId = 4;
+    this.professorId = this.contextService.getUserId();
   }
 
   ngOnInit() {

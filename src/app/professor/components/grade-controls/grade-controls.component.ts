@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'ngx-alerts';
+import { ContextService } from 'src/app/core/services/context.service';
 
 @Component({
   selector: 'grd-grade-controls',
@@ -28,23 +29,20 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
 
   constructor(private readonly fb: FormBuilder,
     private readonly activatedRoute: ActivatedRoute,
+    private readonly contextService: ContextService,
     private readonly professorService: ProfessorService,
     private readonly alertService: AlertService) {
 
     this.professorDataSubscription = new Subscription();
     this.professorGradesSubscription = new Subscription();
     this.professorSubmitSubscription = new Subscription();
-
-    // HARDCODED
-    this.professorId = 4;
+    this.professorId = this.contextService.getUserId();
   }
 
   ngOnInit() {
     this.getRouteParams();
     this.initForm();
     this.getProfessorData();
-
-    // HARDCODED
     this.form.patchValue({ professorId: this.professorId });
   }
 

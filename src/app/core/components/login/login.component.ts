@@ -1,29 +1,72 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { AlertService } from 'ngx-alerts';
+import { ContextService } from '../../services/context.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'grd-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  public email: string;
-  public password: string;
+export class LoginComponent implements OnInit, OnDestroy {
+  public loginForm: FormGroup;
+  private loginSubscription: Subscription;
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly contextService: ContextService,
+    private readonly alertService: AlertService) {
 
-  ngOnInit() {
+    this.redirectIfUserLoggedIn();
   }
 
-  login() {
-    const authRequest = {
-      email: this.email,
-      password: this.password
-    };
+  ngOnInit() {
+    this.initForm();
+  }
 
-    this.authService.login(authRequest).subscribe((response: any) => {
-      console.log(response);
+  ngOnDestroy() {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
+  }
+
+  isLoginDisabled(): boolean {
+    return this.loginForm.invalid;
+  }
+
+  login(): void {
+    const authRequest = this.loginForm.getRawValue();
+
+    this.loginSubscription =  this.authService.login(authRequest)
+      .subscribe((response: any) => {
+        if (response.isAuthenticated && response.authenticatedUser) {
+          this.contextService.storeAuthentication(response.authenticatedUser);
+          this.contextService.redirect();
+
+        } else {
+          this.alertService.warning('Incorrect email or password.');
+        }
+
+      }, (error) => {
+        this.alertService.danger(error.message);
+      });
+  }
+
+  private initForm() {
+    this.loginForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]]
     });
+  }
+
+  private redirectIfUserLoggedIn(): void {
+    const isLoggedIn: boolean = this.contextService.hasLoggedIn();
+
+    if (isLoggedIn) {
+      this.contextService.redirect();
+    }
   }
 
 }
