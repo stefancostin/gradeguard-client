@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AlertModule } from 'ngx-alerts';
@@ -13,6 +14,8 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     CommonModule,
     CoreRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFontAwesomeModule,
     AlertModule.forRoot({maxMessages: 5, timeout: 5000, position: 'right'})
   ],
