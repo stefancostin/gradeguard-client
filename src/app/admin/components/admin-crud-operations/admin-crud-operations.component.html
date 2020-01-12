@@ -29,36 +29,66 @@
 
         <!-- Professor Last Name -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Nume profesor" formControlName="lastName">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Nume profesor" formControlName="lastName">
+            </mat-form-field>
+            <article *ngIf="professorForm.invalid" class="error">
+              <small
+                *ngIf="professorForm.controls['lastName'].errors?.required && professorForm.controls['lastName'].touched"
+                class="d-block">
+                Este necesara introducerea unui nume.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Professor First Name -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Prenume profesor" formControlName="firstName">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Prenume profesor" formControlName="firstName">
+            </mat-form-field>
+            <article *ngIf="professorForm.invalid" class="error">
+              <small
+                *ngIf="professorForm.controls['firstName'].errors?.required && professorForm.controls['firstName'].touched"
+                class="d-block">
+                Este necesara introducerea unui prenume.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Professor Email -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Email" formControlName="email">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+            <article *ngIf="professorForm.invalid" class="error">
+              <small *ngIf="professorForm.controls['email'].errors?.required && professorForm.controls['email'].touched"
+                class="d-block">
+                Este necesara introducerea unui email.</small>
+            </article>
+            <article *ngIf="professorForm.invalid" class="error">
+              <small *ngIf="professorForm.controls['email'].errors?.email && professorForm.controls['email'].touched"
+                class="d-block">
+                Este necesara introducerea unui email valid.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Professor Password -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput type="password" placeholder="Password" formControlName="password">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput type="password" placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
         </div>
         <div *ngIf="this.actionMode === Mode.EDIT" class="row mb-2 form-small-print">
           <div class="col-sm-6 col-md-6">
@@ -71,14 +101,16 @@
 
         <!-- Subject -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <mat-label>Materie predata</mat-label>
-            <mat-select formControlName="subjectsIdList" multiple>
-              <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-                {{ subject.acronym }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <mat-label>Materie predata</mat-label>
+              <mat-select formControlName="subjectsIdList" multiple>
+                <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+                  {{ subject.acronym }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
 
       </div>
@@ -98,36 +130,66 @@
 
         <!-- Student Last Name -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Nume student" formControlName="lastName">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Nume student" formControlName="lastName">
+            </mat-form-field>
+            <article *ngIf="studentForm.invalid" class="error">
+              <small
+                *ngIf="studentForm.controls['lastName'].errors?.required && studentForm.controls['lastName'].touched"
+                class="d-block">
+                Este necesara introducerea unui nume.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Student First Name -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Prenume student" formControlName="firstName">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Prenume student" formControlName="firstName">
+            </mat-form-field>
+            <article *ngIf="studentForm.invalid" class="error">
+              <small
+                *ngIf="studentForm.controls['firstName'].errors?.required && studentForm.controls['firstName'].touched"
+                class="d-block">
+                Este necesara introducerea unui prenume.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Student Email -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Email" formControlName="email">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+            <article *ngIf="studentForm.invalid" class="error">
+              <small *ngIf="studentForm.controls['email'].errors?.required && studentForm.controls['email'].touched"
+                class="d-block">
+                Este necesara introducerea unui email.</small>
+            </article>
+            <article *ngIf="studentForm.invalid" class="error">
+              <small *ngIf="studentForm.controls['email'].errors?.email && studentForm.controls['email'].touched"
+                class="d-block">
+                Este necesara introducerea unui email valid.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Student Password -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput type="password" placeholder="Password" formControlName="password">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput type="password" placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
         </div>
         <div *ngIf="this.actionMode === Mode.EDIT" class="row mb-2 form-small-print">
           <div class="col-sm-6 col-md-6">
@@ -140,20 +202,22 @@
 
         <!-- Anul -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <mat-label>Anul</mat-label>
-            <mat-select formControlName="yearOfStudy">
-              <mat-option [value]="Year.I">
-                {{ Year.I }}
-              </mat-option>
-              <mat-option [value]="Year.II">
-                {{ Year.II }}
-              </mat-option>
-              <mat-option [value]="Year.III">
-                {{ Year.III }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <mat-label>Anul</mat-label>
+              <mat-select formControlName="yearOfStudy">
+                <mat-option [value]="Year.I">
+                  {{ Year.I }}
+                </mat-option>
+                <mat-option [value]="Year.II">
+                  {{ Year.II }}
+                </mat-option>
+                <mat-option [value]="Year.III">
+                  {{ Year.III }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
 
       </div>
@@ -173,55 +237,73 @@
 
         <!-- Subject Name -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Titlu materie" formControlName="name">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Titlu materie" formControlName="name">
+            </mat-form-field>
+            <article *ngIf="subjectForm.invalid" class="error">
+              <small *ngIf="subjectForm.controls['name'].errors?.required && subjectForm.controls['name'].touched"
+                class="d-block">
+                Este necesara introducerea unui nume pentru materie.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Subject Acronym -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <input matInput placeholder="Titlu materie" formControlName="acronym">
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Titlu materie" formControlName="acronym">
+            </mat-form-field>
+            <article *ngIf="subjectForm.invalid" class="error">
+              <small *ngIf="subjectForm.controls['acronym'].errors?.required && subjectForm.controls['acronym'].touched"
+                class="d-block">
+                Este necesara introducerea unui acronim pentru materie.</small>
+            </article>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Year Of Study -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <mat-label>Anul</mat-label>
-            <mat-select formControlName="yearOfStudy">
-              <mat-option [value]="Year.I">
-                {{ Year.I }}
-              </mat-option>
-              <mat-option [value]="Year.II">
-                {{ Year.II }}
-              </mat-option>
-              <mat-option [value]="Year.III">
-                {{ Year.III }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <mat-label>Anul</mat-label>
+              <mat-select formControlName="yearOfStudy">
+                <mat-option [value]="Year.I">
+                  {{ Year.I }}
+                </mat-option>
+                <mat-option [value]="Year.II">
+                  {{ Year.II }}
+                </mat-option>
+                <mat-option [value]="Year.III">
+                  {{ Year.III }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
 
         <mat-divider class="pb-1 mb-3"></mat-divider>
 
         <!-- Semester -->
         <div class="row mb-2">
-          <mat-form-field class="col-sm-3 col-md-2">
-            <mat-label>Semestrul</mat-label>
-            <mat-select formControlName="semester">
-              <mat-option [value]="Semester.I">
-                {{ Semester.I }}
-              </mat-option>
-              <mat-option [value]="Semester.II">
-                {{ Semester.II }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <mat-form-field class="w-100">
+              <mat-label>Semestrul</mat-label>
+              <mat-select formControlName="semester">
+                <mat-option [value]="Semester.I">
+                  {{ Semester.I }}
+                </mat-option>
+                <mat-option [value]="Semester.II">
+                  {{ Semester.II }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
 
       </div>

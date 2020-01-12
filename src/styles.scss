@@ -78,3 +78,10 @@ table { width: 100%; }
 .form-small-print {
   margin-top: -15px;
 }
+
+.error {
+  color: #ff0000;
+  & > small:first-child {
+    margin-top: -5px;
+  }
+}

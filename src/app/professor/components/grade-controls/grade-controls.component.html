@@ -32,7 +32,7 @@
     <div class="col-sm-12">
 
       <div class="row mb-2">
-        <div class="col-sm-2 col-md-3">
+        <div class="col-sm-4 col-md-3">
           <mat-form-field>
             <mat-label>Materia</mat-label>
             <mat-select [(ngModel)]="subjectSelected" (selectionChange)="changeSubject()">
@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="row mb-2">
-        <div class="col-sm-3 col-md-2">
+        <div class="col-sm-4 col-md-3">
           <mat-form-field>
             <mat-label>Studentul</mat-label>
             <mat-select [(ngModel)]="studentSelected" (selectionChange)="changeStudent()">
@@ -65,10 +65,18 @@
 
       <!-- Laboratory Grade -->
       <div class="row mb-2">
-        <div class="col-sm3 col-md-2">
+        <div class="col-sm-4 col-md-3">
           <mat-form-field>
             <input matInput type="text" placeholder="Nota Laborator" formControlName="gradeLaboratory">
           </mat-form-field>
+          <article *ngIf="form.invalid" class="error">
+            <small *ngIf="form.controls['gradeLaboratory'].errors?.max" class="d-block">
+              Valoarea maxima este 10.</small>
+            <small *ngIf="form.controls['gradeLaboratory'].errors?.min" class="d-block">
+              Valoarea minima este 1.</small>
+            <small *ngIf="form.controls['gradeLaboratory'].errors?.pattern" class="d-block">
+              Pot fi introduse doar cifre.</small>
+          </article>
         </div>
       </div>
 
@@ -76,10 +84,18 @@
 
       <!-- Proiject Grade -->
       <div class="row mb-2">
-        <div class="col-sm-3 col-md-2">
+        <div class="col-sm-4 col-md-3">
           <mat-form-field>
             <input matInput type="text" placeholder="Nota Proiect" formControlName="gradeProject">
           </mat-form-field>
+          <article *ngIf="form.invalid" class="error">
+            <small *ngIf="form.controls['gradeProject'].errors?.max" class="d-block">
+              Valoarea maxima este 10.</small>
+            <small *ngIf="form.controls['gradeProject'].errors?.min" class="d-block">
+              Valoarea minima este 1.</small>
+            <small *ngIf="form.controls['gradeProject'].errors?.pattern" class="d-block">
+              Pot fi introduse doar cifre.</small>
+          </article>
         </div>
       </div>
 
@@ -87,10 +103,18 @@
 
       <!-- Exam Grade -->
       <div class="row mb-2">
-        <div class="col-sm-3 col-md-2">
+        <div class="col-sm-4 col-md-3">
           <mat-form-field>
             <input matInput type="text" placeholder="Nota Exmen" formControlName="gradeExam">
           </mat-form-field>
+          <article *ngIf="form.invalid" class="error">
+            <small *ngIf="form.controls['gradeExam'].errors?.max" class="d-block">
+              Valoarea maxima este 10.</small>
+            <small *ngIf="form.controls['gradeExam'].errors?.min" class="d-block">
+              Valoarea minima este 1.</small>
+            <small *ngIf="form.controls['gradeExam'].errors?.pattern" class="d-block">
+              Pot fi introduse doar cifre.</small>
+          </article>
         </div>
       </div>
 
@@ -99,10 +123,18 @@
 
       <!-- Final Grade -->
       <div class="row mb-2">
-        <div class="col-sm-3 col-md-2">
+        <div class="col-sm-4 col-md-3">
           <mat-form-field>
             <input matInput type="text" placeholder="Nota Finala" formControlName="gradeFinal">
           </mat-form-field>
+          <article *ngIf="form.invalid" class="error">
+            <small *ngIf="form.controls['gradeFinal'].errors?.max" class="d-block">
+              Valoarea maxima este 10.</small>
+            <small *ngIf="form.controls['gradeFinal'].errors?.min" class="d-block">
+              Valoarea minima este 1.</small>
+            <small *ngIf="form.controls['gradeFinal'].errors?.pattern" class="d-block">
+              Pot fi introduse doar cifre.</small>
+          </article>
         </div>
       </div>
 

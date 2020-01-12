@@ -17,6 +17,14 @@
                 <label for="email">Email address</label>
                 <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp"
                   placeholder="Enter email">
+                <article *ngIf="loginForm.invalid" class="error">
+                  <small *ngIf="loginForm.controls['email'].errors?.required && loginForm.controls['email'].touched"
+                    class="d-block mt-1">
+                    Email-ul este necesar pentru autentificare.</small>
+                  <small *ngIf="loginForm.controls['email'].errors?.email && loginForm.controls['email'].touched"
+                    class="d-block mt-1">
+                    Este necesara introducerea unui email valid.</small>
+                </article>
               </div>
             </div>
           </div>
@@ -25,14 +33,21 @@
             <div class="col-sm-12 mb-1">
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+                <input type="password" formControlName="password" class="form-control" id="password"
+                  placeholder="Password">
+                <article *ngIf="loginForm.invalid" class="error">
+                  <small *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password'].touched"
+                    class="d-block mt-1">
+                    Parola este necesara pentru autentificare.</small>
+                </article>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-sm-12 pb-2 mb-4">
-              <button type="submit" class="btn btn-primary btn-block" (click)="login()" [disabled]="isLoginDisabled()">Login</button>
+              <button type="submit" class="btn btn-primary btn-block" (click)="login()"
+                [disabled]="isLoginDisabled()">Login</button>
             </div>
           </div>
 

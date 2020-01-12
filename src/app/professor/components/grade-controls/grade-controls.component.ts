@@ -129,10 +129,10 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
       studentId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       subjectId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       professorId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
-      gradeExam: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
-      gradeFinal: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
-      gradeLaboratory: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]],
-      gradeProject: [null, [Validators.min(0), Validators.max(10), Validators.pattern('^[0-9]*$')]]
+      gradeExam: [null, [Validators.min(1), Validators.max(10), Validators.pattern('^[0-9]*$')]],
+      gradeFinal: [null, [Validators.min(1), Validators.max(10), Validators.pattern('^[0-9]*$')]],
+      gradeLaboratory: [null, [Validators.min(1), Validators.max(10), Validators.pattern('^[0-9]*$')]],
+      gradeProject: [null, [Validators.min(1), Validators.max(10), Validators.pattern('^[0-9]*$')]]
     });
   }
 
