@@ -7,6 +7,7 @@ import { YearOfStudy } from 'src/app/core/models/year-of-study.enum';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'ngx-alerts';
 import { ContextService } from 'src/app/core/services/context.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'grd-grade-controls',
@@ -25,6 +26,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
   private professorId: number;
   private professorDataSubscription: Subscription;
   private professorGradesSubscription: Subscription;
+  private professorStudentsSubscription: Subscription;
   private professorSubmitSubscription: Subscription;
 
   constructor(private readonly fb: FormBuilder,
@@ -36,6 +38,7 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
     this.professorDataSubscription = new Subscription();
     this.professorGradesSubscription = new Subscription();
     this.professorSubmitSubscription = new Subscription();
+    this.professorStudentsSubscription = new Subscription();
     this.professorId = this.contextService.getUserId();
   }
 
@@ -53,12 +56,16 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
     if (this.professorGradesSubscription) {
       this.professorGradesSubscription.unsubscribe();
     }
+    if (this.professorStudentsSubscription) {
+      this.professorStudentsSubscription.unsubscribe();
+    }
     if (this.professorSubmitSubscription) {
       this.professorSubmitSubscription.unsubscribe();
     }
   }
 
   changeStudent() {
+    this.getStudentGrades();
     this.form.patchValue({ studentId: this.studentSelected.id });
   }
 
@@ -97,14 +104,37 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getStudentList() {
+  private getStudentGrades() {
     this.professorGradesSubscription = this.professorService.getProfessorGrades(this.subjectSelected.id)
+      .pipe(
+        map((response: any) => {
+          // filter only the grades of the selected student
+          return response.filter((student: any) => student.id === this.studentSelected.id);
+        })
+      )
+      .subscribe((response: any) => {
+        const student = response ? response[0] : null;
+
+        if (student) {
+          this.patchGrades(student);
+        } else {
+          this.clearGrades();
+        }
+
+      }, (error) => {
+        this.alertService.danger(error.message);
+      });
+  }
+
+  private getStudentList() {
+    this.professorStudentsSubscription = this.professorService.getStudentsOfSubject(this.subjectSelected.id)
       .subscribe((response: any) => {
         this.studentList = response;
         this.studentSelected = (response && response.length) ? response[0] : null;
 
         if (this.studentSelected) {
-          this.patchGrades();
+          this.form.patchValue({ studentId: this.studentSelected.id });
+          this.getStudentGrades();
         }
 
       }, (error) => {
@@ -124,6 +154,15 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
     });
   }
 
+  private clearGrades() {
+    this.form.patchValue({
+      gradeExam: null,
+      gradeFinal: null,
+      gradeLaboratory: null,
+      gradeProject: null
+    });
+  }
+
   private initForm() {
     this.form = this.fb.group({
       studentId: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
@@ -136,13 +175,13 @@ export class GradeControlsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private patchGrades() {
+  private patchGrades(student: any) {
     this.form.patchValue({
-      studentId: this.studentSelected.id,
-      gradeExam: this.studentSelected.gradeExam ? this.studentSelected.gradeExam : null,
-      gradeFinal: this.studentSelected.gradeFinal ? this.studentSelected.gradeFinal : null,
-      gradeLaboratory: this.studentSelected.gradeLaboratory ? this.studentSelected.gradeLaboratory : null,
-      gradeProject: this.studentSelected.gradeProject ? this.studentSelected.gradeProject : null
+      studentId: student.id,
+      gradeExam: student.gradeExam ? student.gradeExam : null,
+      gradeFinal: student.gradeFinal ? student.gradeFinal : null,
+      gradeLaboratory: student.gradeLaboratory ? student.gradeLaboratory : null,
+      gradeProject: student.gradeProject ? student.gradeProject : null
     });
   }
 

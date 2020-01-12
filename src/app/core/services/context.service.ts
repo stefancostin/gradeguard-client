@@ -39,10 +39,6 @@ export class ContextService {
     return !!(this.getUserId() && this.getUserRole());
   }
 
-  public isAuthenticated(role: Role): boolean {
-    return role === this.getUserRole();
-  }
-
   public removeAuthentication(): void {
     document.cookie = `${Auth.ID}=;`;
     document.cookie = `${Auth.NAME}=;`;

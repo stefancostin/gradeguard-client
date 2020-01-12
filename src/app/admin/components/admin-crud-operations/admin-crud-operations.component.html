@@ -237,7 +237,7 @@
 
         <!-- Subject Name -->
         <div class="row mb-2">
-          <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="col-sm-6 col-md-6 col-lg-5">
             <mat-form-field class="w-100">
               <input matInput placeholder="Titlu materie" formControlName="name">
             </mat-form-field>
@@ -255,7 +255,7 @@
         <div class="row mb-2">
           <div class="col-sm-6 col-md-4 col-lg-3">
             <mat-form-field class="w-100">
-              <input matInput placeholder="Titlu materie" formControlName="acronym">
+              <input matInput placeholder="Acronim materie" formControlName="acronym">
             </mat-form-field>
             <article *ngIf="subjectForm.invalid" class="error">
               <small *ngIf="subjectForm.controls['acronym'].errors?.required && subjectForm.controls['acronym'].touched"

@@ -16,6 +16,11 @@ export class ProfessorService {
   }
 
   public getProfessorGrades(subjectId: number) {
+    const url = `${BASE_URL}/users/professors/subjects/${subjectId}/grades`;
+    return this.httpClient.get(url);
+  }
+
+  public getStudentsOfSubject(subjectId: number) {
     const url = `${BASE_URL}/users/professors/subjects/${subjectId}/students`;
     return this.httpClient.get(url);
   }

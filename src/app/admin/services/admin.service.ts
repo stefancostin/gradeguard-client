@@ -57,7 +57,7 @@ export class AdminService {
   }
 
   public submitSubjectData(requestBody: any) {
-    const url = `${BASE_URL}/subjectsZZZ`;
+    const url = `${BASE_URL}/subjects`;
     return this.httpClient.post(url, requestBody);
   }
 
