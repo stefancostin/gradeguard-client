@@ -252,6 +252,7 @@ export class AdminCrudOperationsComponent implements OnInit, OnDestroy {
 
   private submitProfessorData() {
     const requestBody = this.professorForm.getRawValue();
+    requestBody.role = Role.PROFESSOR;
 
     if (this.actionMode === Mode.EDIT) {
       // EDIT PROFESSOR
@@ -277,6 +278,7 @@ export class AdminCrudOperationsComponent implements OnInit, OnDestroy {
 
   private submitStudentData() {
     const requestBody = this.studentForm.getRawValue();
+    requestBody.role = Role.STUDENT;
 
     if (this.actionMode === Mode.EDIT) {
       // EDIT STUDENT

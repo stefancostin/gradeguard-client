@@ -59,7 +59,7 @@ export class ContextService {
     const role = this.getUserRole();
     switch (role) {
       case Role.ADMIN:
-        this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/admin/materii');
         break;
       case Role.PROFESSOR:
         this.router.navigateByUrl('/profesor');
